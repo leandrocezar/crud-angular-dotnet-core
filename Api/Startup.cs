@@ -43,7 +43,16 @@ namespace Api
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddControllers();
+            services.AddControllers()
+            .ConfigureApiBehaviorOptions(options =>
+                {
+                    // options.SuppressConsumesConstraintForFormFileParameters = true;
+                    // options.SuppressInferBindingSourcesForParameters = true;
+                    options.SuppressModelStateInvalidFilter = true;
+                    // options.SuppressMapClientErrors = true;
+                    // options.ClientErrorMapping[StatusCodes.Status404NotFound].Link =
+                    //     "https://httpstatuses.com/404";
+                });
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
