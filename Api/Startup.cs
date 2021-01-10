@@ -19,6 +19,8 @@ using Api.Domain.Repositories;
 using Api.Domain.Services;
 using AutoMapper;
 using Api.Mapping;
+using System.Reflection;
+using System.IO;
 
 namespace Api
 {
@@ -38,7 +40,6 @@ namespace Api
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
-                //options.UseSqlServerUseSqlite(_configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
@@ -46,21 +47,31 @@ namespace Api
             services.AddControllers()
             .ConfigureApiBehaviorOptions(options =>
                 {
-                    // options.SuppressConsumesConstraintForFormFileParameters = true;
-                    // options.SuppressInferBindingSourcesForParameters = true;
                     options.SuppressModelStateInvalidFilter = true;
-                    // options.SuppressMapClientErrors = true;
-                    // options.ClientErrorMapping[StatusCodes.Status404NotFound].Link =
-                    //     "https://httpstatuses.com/404";
                 });
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                //{ Title = "CRUD Application with Asp.NET Core 5.0", Version = "v1" }
+
+                {
+                    Version = "v1",
+                    Title = "User CRUD API",
+                    Description = "Web API created with ASP.NET Core 5.0",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Leandro Moreira",
+                        Email = "leandrocezar.dev@gmail.com",
+                        Url = new Uri("https://github.com/leandrocezar"),
+                    }
+                });
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
             services.AddAutoMapper(typeof(Startup));
-            /*services.AddAutoMapper(typeof(ModelToResourceProfile), ));
-            services.AddAutoMapper(typeof(ModelToResourceProfile));*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

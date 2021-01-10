@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210109204829_AddColumnValidations")]
-    partial class AddColumnValidations
+    [Migration("20210110015726_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

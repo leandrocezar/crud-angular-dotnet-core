@@ -6,9 +6,11 @@ using Api.Resources;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Api.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace Api.Controllers
 {
+    [Produces("application/json")]
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
@@ -22,7 +24,12 @@ namespace Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Returns all users.
+        /// </summary>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<User>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IEnumerable<User>> GetAllAsync()
         {
 
@@ -31,7 +38,13 @@ namespace Api.Controllers
             return users;
         }
 
+        /// <summary>
+        /// Returns specific user finding by Id
+        /// </summary>
+        /// <param name="id"></param>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(UserResource), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetById(int id)
         {
 
@@ -44,7 +57,28 @@ namespace Api.Controllers
             return Ok(userResource);
         }
 
+        /// <summary>
+        /// Create user
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /Users
+        ///     {
+        ///         "firstName": "Leandro",
+        ///         "lastName": "Moreira Cezar",
+        ///         "email": "leandrocezar.dev@gmail.com",
+        ///         "birthdayDate": "1984-04-06",
+        ///         "education": 4
+        ///     }
+        /// </remarks>
+        /// <param name="resource">User info</param>
+        /// <returns>A newly created User</returns>
+        /// <response code="200">Returns the newly created user</response>
+        /// <response code="400">Returns the error message</response> 
         [HttpPost]
+        [ProducesResponseType(typeof(UserResource), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PostAsync([FromBody] SaveUserResource resource)
         {
             if (!ModelState.IsValid)
@@ -63,7 +97,28 @@ namespace Api.Controllers
             return Ok(userResource);
         }
 
+        /// <summary>
+        /// Update user info
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /Users
+        ///     {
+        ///         "firstName": "Leandro",
+        ///         "lastName": "Moreira",
+        ///         "email": "leandrocezar.dev@gmail.com",
+        ///         "birthdayDate": "1984-04-06",
+        ///         "education": 4
+        ///     }
+        /// </remarks>
+        /// <param name="resource">User info</param>
+        /// <returns> Updated User</returns>
+        /// <response code="200">Returns the updated data</response>
+        /// <response code="400">Returns the error message</response> 
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(UserResource), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
         {
             if (!ModelState.IsValid)
@@ -79,7 +134,16 @@ namespace Api.Controllers
             return Ok(userResource);
         }
 
+        /// <summary>
+        /// Remove user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Removed  User</returns>
+        /// <response code="200">Returns the removed data</response>
+        /// <response code="400">Returns the error message</response> 
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(UserResource), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             var result = await _userService.DeleteAsync(id);
