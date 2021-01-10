@@ -1,0 +1,21 @@
+<div class="row">
+
+  <div class="container mt-5" *ngIf="usuario">
+
+    <div class="card" z>
+      <div class="card-body">
+        <h5 class="card-title">{{usuario?.firstName }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ usuario?.lastName }}</h6>
+        <p>More info:</p>
+        <ul>
+          <li>ID: {{ usuario?.id }} </li>
+          <li>Email: <a href="mailto:{{usuario.email}}">{{ usuario?.email }} </a></li>
+          <li>Birthday: {{ usuario?.birthdayDate | date:'dd/MM/yyyy' }} </li>
+          <li>Education: {{ usuario?.education | escolaridade }} </li>
+        </ul>
+        <a routerLink="/users/edit/{{usuario?.id}}">Edit User</a>
+      </div>
+    </div>
+    <a routerLink="/users">Back to List</a>
+  </div>
+</div>

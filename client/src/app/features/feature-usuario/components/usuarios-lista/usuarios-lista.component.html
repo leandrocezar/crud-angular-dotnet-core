@@ -1,0 +1,29 @@
+<div class="row">
+
+  <div class="container mt-5">
+
+    <h3>Users list</h3>
+
+    <div class="text-right">
+      <a routerLink="/user/new">Create User</a>
+
+    </div>
+    <table class="table table-hover user-list">
+      <thead>
+        <tr>
+          <th scope="col">Firt Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col" colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario?.firstName }}</td>
+          <td>{{ usuario?.lastName }}</td>
+          <td><a routerLink="/users/{{usuario?.id}}">Details</a></td>
+          <td><a href="javascript:void(0)" (click)="removeUser(usuario)">Delete</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
