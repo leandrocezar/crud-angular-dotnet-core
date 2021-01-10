@@ -20,15 +20,15 @@ export class UsuariosService {
     return this._http.get<Usuario>(this.baseUrl + `users/${id}`);
   }
 
-  create(resource: any): Observable<Usuario>{
+  create(resource: Usuario): Observable<Usuario>{
     return this._http.post<Usuario>(this.baseUrl + "users", resource);
   }
 
-  update(id: number, resource: any) : Observable<Usuario> {
+  update(id: number, resource: Usuario) : Observable<Usuario> {
     return this._http.put<Usuario>(this.baseUrl + `users/${id}`, resource);
   }
 
-  remove(id: number, resource: any) {
-    return this._http.delete<Usuario>(this.baseUrl + `users/${id}`, resource);
+  remove(id: number) {
+    return this._http.delete<Usuario>(this.baseUrl + `users/${id}`);
   }
 }

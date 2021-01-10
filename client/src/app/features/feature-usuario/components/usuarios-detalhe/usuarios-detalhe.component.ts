@@ -14,6 +14,7 @@ export class UsuariosDetalheComponent implements OnInit {
 
   constructor (
     private usuarioService: UsuariosService,
+    /*modalService: ModalDialogService,*/
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -22,7 +23,11 @@ export class UsuariosDetalheComponent implements OnInit {
     this.usuarioService.getById(id)
       .subscribe((response: Usuario) => { this.usuario = response },
       (error) => {
-        throw new Error(error);
+
+        /*this.modalService.openDialog(this.viewRef, {
+          title: 'Some modal title',
+          childComponent: SimpleModalComponent
+        });*/
       })
 
   }

@@ -4,13 +4,16 @@
 
     <h3>Users list</h3>
 
+    <div class="text-right">
+      <a routerLink="/user/new">Create User</a>
 
-    <table class="table table-hover ">
+    </div>
+    <table class="table table-hover user-list">
       <thead>
         <tr>
           <th scope="col">Firt Name</th>
           <th scope="col">Last Name</th>
-          <th scope="col">Actions</th>
+          <th scope="col" colspan="2">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +21,7 @@
           <td>{{ usuario?.firstName }}</td>
           <td>{{ usuario?.lastName }}</td>
           <td><a routerLink="/users/{{usuario?.id}}">Details</a></td>
+          <td><a href="javascript:void(0)" (click)="removeUser(usuario)">Delete</a></td>
         </tr>
       </tbody>
     </table>

@@ -1,0 +1,85 @@
+<div class="container mt-5">
+
+  <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="form-group mb-3">
+      <label
+        for="firstName"
+        class="form-label">First Name<span class="text-danger">*</span></label>
+      <input
+      [class.is-invalid]="usuarioForm.get('firstName').errors && usuarioForm.get('firstName').touched"
+        type="text"
+        class="form-control"
+        id="firstName"
+        required
+        formControlName="firstName"
+        placeholder="Input the first name" />
+
+        <p class="text-danger" *ngIf="submitted && usuarioForm.get('firstName').hasError('required')">Type de first Name</p>
+        <p class="text-danger" *ngIf="submitted && usuarioForm.get('firstName').hasError('maxlength')">Firt Name has
+          {{ usuarioForm.get('firstName').errors.maxlength.actualLength }} chars.
+          Allowed {{ usuarioForm.get('firstName').errors.maxlength.requiredLength }} chars
+        </p>
+    </div>
+    <div class="form-group mb-3">
+      <label for="lastName" class="form-label">Last Name<span class="text-danger">*</span></label>
+      <input
+      [class.is-invalid]="usuarioForm.get('lastName').errors && usuarioForm.get('lastName').touched"
+        type="text"
+        required
+        class="form-control"
+        id="lastName"
+        formControlName="lastName"
+        placeholder="Input the last name" />
+        <p class="text-danger" *ngIf="submitted && usuarioForm.get('lastName').hasError('required')">Type de last Name</p>
+        <p class="text-danger" *ngIf="submitted && usuarioForm.get('lastName').hasError('maxlength')">Last Name has
+          {{ usuarioForm.get('firstName').errors.maxlength.actualLength }} chars.
+          Allowed {{ usuarioForm.get('lastName').errors.maxlength.requiredLength }} chars
+        </p>
+    </div>
+
+    <div class="form-group mb-3">
+      <label
+        for="email"
+        class="form-label">E-mail<span class="text-danger">*</span></label>
+      <input
+        [class.is-invalid]="usuarioForm.get('email').errors && usuarioForm.get('email').touched"
+        type="email"
+        required
+        class="form-control"
+        id="email"
+        formControlName="email"
+        placeholder="Input the e-mail" />
+        <p class="text-danger" *ngIf="submitted && usuarioForm.get('email').hasError('required')">Type de e-mail</p>
+        <p class="text-danger" *ngIf="submitted && usuarioForm.get('email').hasError('email')">Type a valid e-mail
+        </p>
+    </div>
+    <div class="form-group mb-3">
+      <label for="birthday" class="form-label">Birthday</label>
+      <input
+        [class.is-invalid]="usuarioForm.get('birthdayDate').errors && usuarioForm.get('birthdayDate').touched"
+        type="text"
+        required
+        class="form-control"
+        id="birthDayDate"
+        formControlName="birthdayDate"
+        placeholder="DD/MM/YYYY" maxlength="10">
+    </div>
+    <p class="text-danger" *ngIf="submitted && usuarioForm.get('birthdayDate').hasError('required')">Type de birthday in DD/MM/YYYY format</p>
+    <p class="text-danger" *ngIf="submitted && usuarioForm.get('birthdayDate').hasError('validDate')">Type a valid date</p>
+    <p class="text-danger" *ngIf="submitted && usuarioForm.get('birthdayDate').hasError('futureDate')">Future is not avaliable to birthday!</p>
+    <div class="form-group mb-3">
+      <label for="education" class="form-label">Education<span class="text-danger">*</span></label>
+      <select
+        [class.is-invalid]="usuarioForm.get('education').errors && usuarioForm.get('education').touched"
+        class="form-control"
+        id="education"
+        formControlName="education">
+        <option [value]="null">Select education level</option>
+        <option *ngFor="let escolaridade of escolaridades" [value]="escolaridade">{{ escolaridade | escolaridade}}</option>
+      </select>
+    </div>
+    <div class="form-group mb-3">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>

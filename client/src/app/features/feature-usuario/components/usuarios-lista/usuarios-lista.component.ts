@@ -27,4 +27,17 @@ export class UsuariosListaComponent implements OnInit {
       (error) => console.log(error));
   }
 
+  removeUser(usuario: Usuario){
+    this.usuariosService.remove(usuario.id)
+      .subscribe((response: Usuario) => {
+        alert("Operação realizada com sucesso")
+        this.getUsuarios();
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+
+
 }

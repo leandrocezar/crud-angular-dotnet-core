@@ -12,6 +12,13 @@ import { UsuariosListaComponent } from './features/feature-usuario/components/us
 import { HomeComponent } from './core/components/home/home.component';
 import { HttpClientModule } from "@angular/common/http";
 import { UsuariosDetalheComponent } from './features/feature-usuario/components/usuarios-detalhe/usuarios-detalhe.component';
+import { SharedModule } from "./shared/shared.module";
+import { EscolaridadePipe } from "./shared/pipes/escolaridade.pipe";
+import { UsuarioFormComponent } from "./features/feature-usuario/components/usuario-form/usuario-form.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UsuariosCreateComponent } from "./features/feature-usuario/components/usuarios-create/usuarios-create.component";
+import { UsuariosEditComponent } from './features/feature-usuario/components/usuarios-edit/usuarios-edit.component';
+import { DatePipe } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -22,15 +29,25 @@ import { UsuariosDetalheComponent } from './features/feature-usuario/components/
     PageNotFoundComponent,
     UsuariosListaComponent,
     HomeComponent,
-    UsuariosDetalheComponent
+    UsuariosDetalheComponent,
+    UsuarioFormComponent,
+    UsuariosCreateComponent,
+    UsuariosEditComponent
   ],
   imports: [
-    BrowserModule,
+
+  BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
   ],
-  providers: [],
+  providers: [
+    EscolaridadePipe,
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

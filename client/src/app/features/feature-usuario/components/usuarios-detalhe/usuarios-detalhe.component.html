@@ -8,15 +8,14 @@
         <h6 class="card-subtitle mb-2 text-muted">{{ usuario?.lastName }}</h6>
         <p>More info:</p>
         <ul>
-          <li>Email: {{ usuario?.email }} </li>
+          <li>ID: {{ usuario?.id }} </li>
+          <li>Email: <a href="mailto:{{usuario.email}}">{{ usuario?.email }} </a></li>
           <li>Birthday: {{ usuario?.birthdayDate | date:'dd/MM/yyyy' }} </li>
-          <li>Education: {{ usuario?.birthdayDate | date:'dd/MM/yyyy' }} </li>
-          <li>Escolaridade: {{ usuario?.education }} </li>
+          <li>Education: {{ usuario?.education | escolaridade }} </li>
         </ul>
+        <a routerLink="/users/edit/{{usuario?.id}}">Edit User</a>
       </div>
     </div>
-    <!-- <pre>
-      {{ usuario | json }}
-    </pre> -->
+    <a routerLink="/users">Back to List</a>
   </div>
 </div>
