@@ -14,6 +14,6 @@ namespace Api.Resources
         public string Email { get; set; }
         public DateTime BirthdayDate { get; set; }
         
-        public EducationEnum Education { get; set; }
+        public Education Education { get; set; }
     }
 }

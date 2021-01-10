@@ -16,9 +16,12 @@ namespace Api.Domain.Models
         [MaxLength(80)]
         public string Email { get; set; }
         [Required]
+        [DataType(DataType.Text)]
         public DateTime BirthdayDate { get; set; }
         [Required]
-        public EducationEnum Education { get; set; }
+        [EnumDataType
+            (typeof(Education))]  
+        public Education Education { get; set; }
         
     }
 }

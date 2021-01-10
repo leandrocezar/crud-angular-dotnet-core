@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace Api.Domain.Models
 {
-    public enum EducationEnum : byte
+    public enum Education : byte
     {
         [Description("Infantil")]
         Infantil = 1,
